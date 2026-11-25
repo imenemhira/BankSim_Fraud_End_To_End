@@ -1,0 +1,10 @@
+joblib
+scikit-learn
+mlflow
+docker
+pydantic
+dvc
+pandas 
+numpy
+logging
+pathlib
