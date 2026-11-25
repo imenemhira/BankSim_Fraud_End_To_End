@@ -17,7 +17,7 @@ def clean_data(input_path: Path, output_path: Path) -> pd.DataFrame:
     # Work on a copy
     df = df.copy()
 
-    df = df.drop(columns=["Customer"])
+    df = df.drop(columns=["customer"])
 
     numerical_columns = ["age", "zipcodeOri", "zipMerchant"]
 
@@ -39,7 +39,7 @@ def clean_data(input_path: Path, output_path: Path) -> pd.DataFrame:
 
 if __name__ == "__main__":
 
-    input_path = Path("../data/raw/data.csv")
-    output_path = Path("../data/processed/bank_cleaned_data.csv")
+    input_path = Path("data/raw/data.csv")
+    output_path = Path("data/processed/bank_cleaned_data.csv")
 
     clean_data(input_path, output_path)
