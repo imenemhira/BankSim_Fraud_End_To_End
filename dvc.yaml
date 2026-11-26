@@ -1,0 +1,18 @@
+stages:
+  preprocess:
+    cmd: python -m src.data.preprocessing
+    deps:
+      - data/raw/data.csv
+      - src/data/preprocessing.py
+      - src/data/ingestion.py
+    outs:
+      - data/processed/bank_cleaned_data.csv
+
+  train:
+    cmd: python -m src.models.train
+    deps:
+      - data/processed/bank_cleaned_data.csv
+      - src/models/train.py
+      - src/features/feature_engineering.py
+    outs:
+      - models/
