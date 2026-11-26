@@ -1,0 +1,18 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python -m src.data.preprocessing
+    deps:
+    - path: data/raw/data.csv
+      hash: md5
+      md5: cea41e0a816259b407337ba93dd968c2
+      size: 48986035
+    - path: src/data/preprocessing.py
+      hash: md5
+      md5: 1c0a12643c31440a372b9e8c72ab0773
+      size: 1096
+    outs:
+    - path: data/processed/bank_cleaned_data.csv
+      hash: md5
+      md5: 82d8081dc7e90947191483f9f21bf776
+      size: 28474946
