@@ -1,4 +1,5 @@
 import pandas as pd
+import mlflow
 from src.features.feature_engineering import create_preprocessor
 from sklearn.pipeline import Pipeline
 import joblib
@@ -54,6 +55,9 @@ def compare_models(x_train,y_train):
 
         }
     results_df=pd.DataFrame(results).T
+    for model_name,metrics in results.items():
+        with mlflow.start_run(run_name=model_name,nested=True):
+            mlflow.log_metrics(metrics)
     print('model comparison')
     print(results_df.sort_values('f1',ascending=False))
     best_model_name=results_df['f1'].idxmax()
@@ -95,6 +99,8 @@ def tune_best_model(model,model_name,x_train,y_train):
         verbose=1
     )
     grid_search.fit(x_train,y_train)
+    mlflow.log_params(grid_search.best_params_)
+    mlflow.log_metric('best cv f1',grid_search.best_score_)
     return grid_search.best_estimator_
 def evaluate_model(model,x_test,y_test):
     predictions=model.predict(x_test)
